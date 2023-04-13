@@ -35,6 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo '${{ toJSON(github.event) }}'
+          echo '${{ toJSON(github) }}'
           echo '${{ github.head_ref }}'
           echo '${{ github.event.number }}'
           gh workflow run prerelease.yml --ref ${{ github.head_ref }} -f pr_number=${{ github.event.number }}
