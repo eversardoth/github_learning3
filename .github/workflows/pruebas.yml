@@ -40,7 +40,7 @@ jobs:
             const empty2 = await github.rest.repos.getCombinedStatusForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
+              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
             })
 
             core.info(JSON.stringify(empty2))
@@ -48,7 +48,7 @@ jobs:
             const empty3 = await github.rest.repos.listCommitStatusesForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
+              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
             })
 
             core.info(JSON.stringify(empty3))
