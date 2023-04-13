@@ -6,7 +6,7 @@ name: CI
 on:
   workflow_dispatch:
     inputs:
-      prnumber:
+      pr_number:
         type: number
 
 
