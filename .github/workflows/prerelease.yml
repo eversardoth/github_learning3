@@ -45,8 +45,6 @@ jobs:
           git checkout -
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git rebase origin/master
-          git push --force
       - name: Run a one-line scripttt3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
