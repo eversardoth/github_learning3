@@ -38,5 +38,3 @@ jobs:
           echo '${{ github.head_ref }}'
           echo '${{ github.event.number }}'
           gh workflow run prerelease.yml --ref ${{ github.head_ref }} -f pr_number=${{ github.event.number }}
-
-
