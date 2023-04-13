@@ -41,7 +41,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git rebase master
+          git rebase origin/master
           git push --force
       - name: Run a one-line scripttt3
         env:
