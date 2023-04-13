@@ -64,7 +64,7 @@ jobs:
             core.info(JSON.stringify(empty3));
 
             const start = new Date();
-            const end = new Date().setSeconds(start.getSeconds() + 1);
+            const end = new Date(start.getTime() + 1000);
             const iwk = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
