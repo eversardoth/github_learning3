@@ -71,7 +71,7 @@ jobs:
             const iwk = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: "2e1e3c18b85177cd2435d8881f3448ecd5342040",
+              head_sha: "3f2ac7c67550d479938e5947a610c1360d029367",
               name: "build",
               external_id: "ca395085-040a-526b-2ce8-bdc85f692774",
               status: "completed",
