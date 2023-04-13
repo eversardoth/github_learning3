@@ -64,11 +64,14 @@ jobs:
             core.info(JSON.stringify(empty3));
 
             const start = new Date();
-            const end = new Date(start.getTime() + 1000);
+            console.log(start.toISOString())
+            const end = new Date(start.getTime() + 100000);
+            console.log(end.toISOString());
+            console.log(url);
             const iwk = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: "a126953c24be5a2592bcc2d573a061a9d2fcb74c",
+              head_sha: "308b89255a5e5c75eb7fbba7bc73f53fb35a412b",
               name: "build",
               status: "completed",
               // Careful, code injection can happen.
