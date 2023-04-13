@@ -24,7 +24,7 @@ jobs:
             const response = await github.rest.checks.listForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "32ad1c66df88a3bc0fc55532f6ac04bbec7aae2d"
+              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
             })
 
             core.info(JSON.stringify(response))
