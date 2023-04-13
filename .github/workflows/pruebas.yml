@@ -37,6 +37,22 @@ jobs:
 
             core.info(JSON.stringify(empty))
 
+            const empty2 = await github.rest.checks.getCombinedStatusForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
+            })
+
+            core.info(JSON.stringify(empty2))
+
+            const empty3 = await github.rest.checks.listCommitStatusesForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
+            })
+
+            core.info(JSON.stringify(empty3))
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
