@@ -29,13 +29,13 @@ jobs:
 
             core.info(JSON.stringify(response))
 
-            const response = await github.rest.checks.listForRef({
+            const empty = await github.rest.checks.listForRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
             })
 
-            core.info(JSON.stringify(response))
+            core.info(JSON.stringify(empty))
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
