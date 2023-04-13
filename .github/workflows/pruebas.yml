@@ -65,7 +65,7 @@ jobs:
 
             const end = new Date();
             console.log(end.toISOString())
-            const start = new Date(start.getTime() - 200000);
+            const start = new Date(end.getTime() - 200000);
             console.log(start.toISOString());
             console.log(url);
             const iwk = await github.rest.checks.create({
