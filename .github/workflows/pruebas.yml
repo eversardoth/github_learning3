@@ -27,7 +27,7 @@ jobs:
               ref: "32ad1c66df88a3bc0fc55532f6ac04bbec7aae2d"
             })
 
-            core.info(response)
+            core.info(JSON.stringify(response))
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
