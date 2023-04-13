@@ -38,7 +38,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git rebase master
-          git push --force
           sed -i s/'branch_name'/'${{ github.ref_name }}'/ .releaserc
           sed -i s/'pr_number'/PR${PR_NUMBER}/ .releaserc
           cat .releaserc
