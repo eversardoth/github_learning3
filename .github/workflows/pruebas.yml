@@ -63,7 +63,7 @@ jobs:
               // Careful, code injection can happen.
               conclusion: "success",
               started_at: start,
-              completed_at: new Date.toISOString()
+              completed_at: new Date().toISOString()
             });
 
             core.info(JSON.stringify(iwk));
