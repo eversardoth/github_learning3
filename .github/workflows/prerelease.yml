@@ -35,3 +35,20 @@ jobs:
           sed -i s/'pr_number'/PR${PR_NUMBER}/ .releaserc
           cat .releaserc
           echo "$PR_NUMBER"
+      - name: Run a one-line scripttt3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git rebase master
+          git push --force
+      - name: Run a one-line scripttt3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install -g @google/semantic-release-replace-plugin
+          npm install -g @semantic-release/git
+          npm install -g semantic-release
+          npx semantic-release --debug
+
