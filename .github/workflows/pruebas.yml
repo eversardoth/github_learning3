@@ -23,13 +23,13 @@ jobs:
           retries: 3
           script: |
 
-            const query = `query($owner:String!, $name:String!, $baseRefName:String!, $headRefName:String!, $states:[String!]!){
+            const query = "query($owner:String!, $name:String!, $baseRefName:String!, $headRefName:String!, $states:[String!]!){
               repository(owner:$owner, name:$name){
                 pullRequests(baseRefName: $baseRefName, headRefName: $headRefName, states:$states){
                   mergeStateStatus
                 }
               }
-            }`;
+            }";
 
             const variables = {
               owner: context.repo.owner,
