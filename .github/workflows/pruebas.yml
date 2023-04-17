@@ -25,7 +25,7 @@ jobs:
 
             const query = `query($owner:String!, $name:String!, $baseRefName:String!, $headRefName:String!, $states:[PullRequestState!]!){
               repository(owner:$owner, name:$name){
-                pullRequests(baseRefName: $baseRefName, headRefName: $headRefName, states:$states){
+                pullRequests(baseRefName: $baseRefName, headRefName: $headRefName, states:$states, first: 1){
                   nodes{
                     mergeStateStatus
                   }
