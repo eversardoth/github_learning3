@@ -55,6 +55,7 @@ jobs:
 
             
             console.log(JSON.stringify(result));
+            console.log(merge_state);
 
 
 
