@@ -18,7 +18,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Pre-release validation
-        if: startsWith(github.ref_name,'feature') && github.event_name == 'push'
         uses: actions/github-script@v6
         with:
           retries: 3
