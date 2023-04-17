@@ -38,7 +38,10 @@ jobs:
               name: context.repo.repo,
               baseRefName: "main",
               headRefName: process.env.GITHUB_REF_NAME,
-              states: ["OPEN"]
+              states: ["OPEN"],
+              headers: {
+                Accept: `application/vnd.github.merge-info-preview+json`
+              }
             };
 
             const result = await github.graphql(query, variables);
