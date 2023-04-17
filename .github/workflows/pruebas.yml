@@ -18,6 +18,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Pre-release validation
+        id: prerelease_validation
         uses: actions/github-script@v6
         with:
           retries: 3
@@ -45,16 +46,27 @@ jobs:
             };
 
             const result = await github.graphql(query, variables);
+            
+            const result = await github.graphql(query, variables);
+
+            const merge_state = result.repository.pullRequests.nodes[0];
+
+            if(merge_state && merge_state !== 'BEHIND' && merge_state !== 'DIRTY'){
+              core.setOutput(generate_prerelease, "yes");
+            }
+
+            
             console.log(JSON.stringify(result));
 
 
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        if: steps.prerelease_validation.outputs.generate_prerelease != 'yes'
+        run: No prerelease
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        if: steps.prerelease_validation.outputs.generate_prerelease == 'yes'
         run: |
-          echo Add other actions to build,
-          echo '${{ toJSON(github.event) }}'
+          echo yes pre-release
