@@ -17,91 +17,32 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/github-script@v6
-        env:
-          GITHUB_RUN_ATTEMPT: '${{ github.run_attempt }}'
+      - name: Pre-release validation
+        if: startsWith(github.ref_name,'feature') && github.event_name == 'push'
+        uses: actions/github-script@v6
         with:
+          retries: 3
           script: |
 
-            const responsePull = await github.rest.pulls.get({
+            const query = `query($owner:String!, $name:String!, $baseRefName:String!, $headRefName:String!, $states:[String!]!){
+              repository(owner:$owner, name:$name){
+                pullRequests(baseRefName: $baseRefName, headRefName: $headRefName, states:$states){
+                  mergeStateStatus
+                }
+              }
+            }
+            `;
+
+            const variables = {
               owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: "4"
-            })
+              name: context.repo.repo,
+              baseRefName: "main"
+              headRefName: process.env.GITHUB_REFNAME
+              states: ["OPEN"]
+            };
 
-            core.info(JSON.stringify(responsePull))
-
-            const { data } = await github.rest.actions.listJobsForWorkflowRunAttempt({
-              ...context.repo,
-              run_id: context.runId,
-              attempt_number: process.env.GITHUB_RUN_ATTEMPT,
-            });
-
-            const url = data.jobs[0].html_url
-
-            const response = await github.rest.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
-            })
-
-            core.info(JSON.stringify(response))
-
-            const empty = await github.rest.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "f303e5d392d2593f2bdfb6a1d1878fb7895b1024"
-            })
-
-            core.info(JSON.stringify(empty))
-
-            const empty2 = await github.rest.repos.getCombinedStatusForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
-            })
-
-            core.info(JSON.stringify(empty2))
-
-            const empty3 = await github.rest.repos.listCommitStatusesForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "f3fda8828b1dab312e962550b2312c2e8cfa59b1"
-            })
-
-            core.info(JSON.stringify(empty3));
-
-            const end = new Date();
-            console.log(end.toISOString())
-            const start = new Date(end.getTime() - 1000);
-            console.log(start.toISOString());
-            console.log(url);
-            const iwk = await github.rest.checks.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              head_sha: "3f2ac7c67550d479938e5947a610c1360d029367",
-              name: "build",
-              external_id: "ca395085-040a-526b-2ce8-bdc85f692774",
-              status: "completed",
-              // Careful, code injection can happen.
-              conclusion: "success",
-              started_at: start.toISOString(),
-              completed_at: end.toISOString(),
-              detailsurl: url
-            });
-
-
-            core.info(JSON.stringify(iwk));
-
-
-
-            const empty4 = await github.rest.checks.listForRef({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: "bb6c86a2d90d6337f67fbfea885451b4faab4937"
-            })
-
-            core.info(JSON.stringify(empty4))
+            const result = await github.graphql(query, variables);
+            console.log(result);
 
 
 
