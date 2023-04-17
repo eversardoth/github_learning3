@@ -23,13 +23,19 @@ jobs:
           retries: 3
           script: |
 
-            const query = `hola`;
+            const query = `query($owner:String!, $name:String!, $baseRefName:String!, $headRefName:String!, $states:[String!]!){
+              repository(owner:$owner, name:$name){
+                pullRequests(baseRefName: $baseRefName, headRefName: $headRefName, states:$states){
+                  mergeStateStatus
+                }
+              }
+            }`;
 
             const variables = {
               owner: context.repo.owner,
               name: context.repo.repo,
-              baseRefName: "main"
-              headRefName: process.env.GITHUB_REF_NAME
+              baseRefName: "main",
+              headRefName: process.env.GITHUB_REF_NAME,
               states: ["OPEN"]
             };
 
