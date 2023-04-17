@@ -49,7 +49,7 @@ jobs:
 
             const merge_state = result.repository.pullRequests.nodes[0];
 
-            if(merge_state && merge_state !== 'BEHIND' && merge_state !== 'DIRTY'){
+            if(merge_state && merge_state.mergeStateStatus !== 'BEHIND' && merge_state.mergeStateStatus !== 'DIRTY'){
               core.setOutput("generate_prerelease", "yes");
             }
 
