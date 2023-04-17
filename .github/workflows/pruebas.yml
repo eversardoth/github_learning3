@@ -37,7 +37,7 @@ jobs:
               owner: context.repo.owner,
               name: context.repo.repo,
               baseRefName: "main"
-              headRefName: process.env.GITHUB_REFNAME
+              headRefName: process.env.GITHUB_REF_NAME
               states: ["OPEN"]
             };
 
